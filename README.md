@@ -17,15 +17,13 @@ This project leverages machine learning and external APIs to create a comprehens
 ## Components
 
 1. **Food Classification using CNN**:
-    - **Dataset**: The project uses the Food-101 dataset, which contains 101,000 images of food items grouped into 101 categories.     
-      https://www.kaggle.com/datasets/kmader/food41/data
+    - **Dataset**: The project uses the Food-101 dataset, which contains 101,000 images of food items grouped into 101 categories.
     - **Model**: A ResNet-50 architecture is employed, with transfer learning to leverage pre-trained weights and fine-tuning on the Food-101 dataset.
     - **Training**: The model has already been trained on the Food-101 dataset, and the trained model weights are included in this project.
 
 2. **Edamam API Integration**:
     - **API Usage**: After predicting the food category, the system queries the Edamam API to fetch nutritional information such as calories, protein, fat, carbohydrates, vitamins, and minerals.
     - **User Input**: Users need to create an Edamam account and provide their `app_id` and `app_key` to use the API.
-      https://www.edamam.com/
 
 ## Implementation Details
 
@@ -48,20 +46,10 @@ This project leverages machine learning and external APIs to create a comprehens
     - Run the `training.py` script with appropriate paths to train the CNN model.
     - The trained model weights will be saved for later use.
 
-2. **Predicting Food Items**:
-    - Ensure the trained model weights and class names are available.
-    - Run the `prediction.py` script with the path to the input image.
-    - The script will output the predicted food category.
-
-3. **Getting Nutritional Information**:
-    - Ensure you have your Edamam `app_id` and `app_key`.
-    - Run the `api_request.py` script with the predicted food category.
-    - The script will output the nutritional information for the food item.
-      
-4. **Combined Classification and Information Retrieval**:
+2. **Combined Classification and Information Retrieval**:
     - Run the `Food_vision.py` script with the path to the input image.
     - The script will output both the predicted food category and its nutritional information.
-
+      
 ## Installation
 
 To run this project, ensure you have the following libraries installed:
