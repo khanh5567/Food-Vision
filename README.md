@@ -17,7 +17,8 @@ This project leverages machine learning and external APIs to create a comprehens
 ## Components
 
 1. **Food Classification using CNN**:
-    - **Dataset**: The project uses the Food-101 dataset, which contains 101,000 images of food items grouped into 101 categories.
+    - **Dataset**: The project uses the Food-101 dataset, which contains 101,000 images of food items grouped into 101 categories.     
+      https://www.kaggle.com/datasets/kmader/food41/data
     - **Model**: A ResNet-50 architecture is employed, with transfer learning to leverage pre-trained weights and fine-tuning on the Food-101 dataset.
     - **Training**: The model has already been trained on the Food-101 dataset, and the trained model weights are included in this project.
 
