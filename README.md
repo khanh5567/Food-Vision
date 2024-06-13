@@ -25,6 +25,7 @@ This project leverages machine learning and external APIs to create a comprehens
 2. **Edamam API Integration**:
     - **API Usage**: After predicting the food category, the system queries the Edamam API to fetch nutritional information such as calories, protein, fat, carbohydrates, vitamins, and minerals.
     - **User Input**: Users need to create an Edamam account and provide their `app_id` and `app_key` to use the API.
+      https://www.edamam.com/
 
 ## Implementation Details
 
