@@ -6,8 +6,8 @@ import json
 # Function to get food information from Edamam API
 def get_food_info(food_item):
     # app ID and app key from Edamam
-    app_id = '2ea14798'
-    app_key = 'ad00d45203bbf44b5ee30c5bcd56178f'
+    app_id = 'replace with Edamam app_id'
+    app_key = 'replace with Edamam app_key'
 
     # Construct the URL for the API request
     url = f'https://api.edamam.com/api/food-database/v2/parser?ingr={food_item}&app_id={app_id}&app_key={app_key}'
