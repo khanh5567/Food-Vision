@@ -52,8 +52,8 @@ def load_model(model_path, class_names_path):
 
 
 # Predefined paths for the model and class names
-model_path = "C:/Users/Abdella/OneDrive/Desktop/summer2024classes/AI/finalpoject/weight/data/best_model.pth"
-class_names_path = "C:/Users/Abdella/OneDrive/Desktop/summer2024classes/AI/finalpoject/weight/data/classnames/class_names.json"
+model_path = "weights/data/best_model.pth"
+class_names_path = "weights/data/classnames/class_names.json"
 
 # Load the model and class names once
 model, class_names = load_model(model_path, class_names_path)
@@ -91,7 +91,7 @@ def predict_image(image_path):
 
 if __name__ == '__main__':
     # Example image path
-    image_path = "C:/Users/Abdella/OneDrive/Desktop/summer2024classes/AI/finalpoject/sample_pics/32.jpg"
+    image_path = "sample_pics/66.jpg"
     # Predict the class of the image
     formatted_class = predict_image(image_path)
     # Print the predicted class
