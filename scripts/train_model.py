@@ -161,4 +161,3 @@ if __name__ == '__main__':
     dataset_path = '/home/suprim/Dev/Abdella/pythonProject/finalproject/food-101dataset/data'
     model_save_path = '/home/suprim/Dev/Abdella/pythonProject/finalproject/weight/data'
     train_model(dataset_path, model_save_path, num_epochs=10, num_passes=10)  # Adjust num_epochs and num_passes as needed
-
