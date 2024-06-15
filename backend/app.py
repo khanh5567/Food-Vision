@@ -33,11 +33,11 @@ def upload_file():
         predicted_class = predict_image(image)
 
         # Get food information based on the predicted class
-        food_info_dict = get_food_info(predicted_class)
+        #food_info_dict = get_food_info(predicted_class)
 
         response = jsonify({
             'predicted_class': predicted_class,
-            'nutrient': food_info_dict['nutrients'],
+            #'nutrient': food_info_dict['nutrients'],
         })
         response.headers.add('Access-Control-Allow-Origin', '*')
         return response, 200

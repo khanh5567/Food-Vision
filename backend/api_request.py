@@ -29,30 +29,8 @@ def get_food_info(food_item):
         else:
             food = None
 
-        # Print the simplified output if food information is found
-        if food:
-            return food
-
-            # print(f"Food Label: {food['label']}")
-            # print(f"Category: {food.get('category', 'N/A')}")
-            # print(f"Calories: {food['nutrients'].get('ENERC_KCAL', 'N/A')} kcal")
-            # print(f"Protein: {food['nutrients'].get('PROCNT', 'N/A')} g")
-            # print(f"Fat: {food['nutrients'].get('FAT', 'N/A')} g")
-            # print(f"Carbs: {food['nutrients'].get('CHOCDF', 'N/A')} g")
-            # print(f"Fiber: {food['nutrients'].get('FIBTG', 'N/A')} g")
-            # print(f"Cholesterol: {food['nutrients'].get('CHOLE', 'N/A')} mg")
-            # print(f"Sodium: {food['nutrients'].get('NA', 'N/A')} mg")
-            # print(f"Potassium: {food['nutrients'].get('K', 'N/A')} mg")
-            # print(f"Calcium: {food['nutrients'].get('CA', 'N/A')} mg")
-            # print(f"Iron: {food['nutrients'].get('FE', 'N/A')} mg")
-            # print(f"Vitamin A: {food['nutrients'].get('VITA_RAE', 'N/A')} µg")
-            # print(f"Vitamin C: {food['nutrients'].get('VITC', 'N/A')} mg")
-            # print(f"Sugars: {food['nutrients'].get('SUGAR', 'N/A')} g")
-            # # Extract and print the ingredients
-            # ingredients = food.get('foodContentsLabel', 'N/A')
-            # print(f"Ingredients: {ingredients}")
-        else:
-            print("No food information found.")
+        return food
+    
     else:
         # Print the error status code if the request failed
         print(f"Error: {response.status_code} - {response.text}")
