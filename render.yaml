@@ -1,9 +1,9 @@
 services:
   - type: web
-    name: my-flask-app
+    name: food-vision
     env: python
     buildCommand: ""
-    startCommand: gunicorn -w 4 -b 0.0.0.0:5000 backend.app:app
+    startCommand: gunicorn -w 4 -b 0.0.0.0:0 backend.app:app
     envVars:
       - key: FLASK_ENV
         value: production

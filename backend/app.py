@@ -1,9 +1,8 @@
 from flask import Flask, request, jsonify, send_from_directory #need import
 from flask_cors import CORS # need import
 from PIL import Image
-import os
-from prediction import predict_image
-from api_request import get_food_info
+from backend.prediction import predict_image
+from backend.api_request import get_food_info
 
 app = Flask(__name__, static_folder='frontend')
 cors = CORS(app)
