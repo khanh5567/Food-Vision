@@ -60,7 +60,7 @@ model, class_names = load_model(model_path, class_names_path)
 
 
 # Function to predict an image
-def predict_image(image_path):
+def predict_image(image):
     # Define the image transformations
     transform = transforms.Compose([
         transforms.Resize((128, 128)),  # Resize the image
@@ -69,7 +69,7 @@ def predict_image(image_path):
     ])
 
     # Open and preprocess the image
-    image = Image.open(image_path).convert('RGB')
+    image = image.convert('RGB')
     image = transform(image).unsqueeze(0)  # Add batch dimension
 
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
@@ -83,16 +83,5 @@ def predict_image(image_path):
         _, predicted = torch.max(outputs.data, 1)
         predicted_class = class_names[predicted.item()]
         formatted_class = predicted_class.replace('_', ' ').title()  # Format the class name
-    print("This is an image of a", formatted_class)
+    #print("This is an image of a", formatted_class)
     return formatted_class
-
-
-# Sample use of the predict_image function
-
-if __name__ == '__main__':
-    # Example image path
-    image_path = "sample_pics/66.jpg"
-    # Predict the class of the image
-    formatted_class = predict_image(image_path)
-    # Print the predicted class
-    print(f"{formatted_class}")
