@@ -1,9 +1,9 @@
-Flask
+tensorflow
+flask
 flask-cors
-torch 
-torchvision 
 pillow 
 requests 
 tqdm 
-tensorboard
 gunicorn
+keras
+numpy

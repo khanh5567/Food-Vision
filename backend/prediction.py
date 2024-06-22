@@ -1,87 +1,31 @@
-# Author: Abdella Osman
-
-import os
-import torch
-import torch.nn as nn
-from torchvision import transforms, models
-from PIL import Image
-import json
+#pip install h5py pandas matplotlib opencv-python keras tensorflow
+import numpy as np
+from keras.models import load_model
+from keras.preprocessing.image import load_img, img_to_array
 import warnings
+warnings.filterwarnings('ignore')
 
-# Suppress specific warnings
-warnings.filterwarnings("ignore", category=UserWarning, module="torchvision.models._utils")
+image_size = (224, 224)
 
-# Define the CNN Model
-class Food101CNN(nn.Module):
-    def __init__(self, num_classes=10):
-        super(Food101CNN, self).__init__()
-        # Load a pre-trained ResNet50 model
-        self.model = models.resnet50(pretrained=True)
-        # Replace the final fully connected layer to match the number of classes
-        self.model.fc = nn.Linear(self.model.fc.in_features, num_classes)
+# Load the saved model
+model_final = load_model('my_model.keras')
 
-    def forward(self, x):
-        # Forward pass through the model
-        return self.model(x)
+# Function to load and predict a single image from the file system
+def predict_image(image_path, model, class_indices):
+    image = load_img(image_path, target_size=image_size)
+    image = img_to_array(image)
+    image = np.expand_dims(image, axis=0)
+    image = image / 255.0  # Rescale the image
 
+    prediction = model.predict(image)
+    predicted_index = np.argmax(prediction[0])
+    predicted_class = class_indices[predicted_index]
 
-# Function to load a model
-def load_model(model_path, class_names_path):
-    # Check if the model path exists
-    if not os.path.exists(model_path):
-        raise FileNotFoundError(f"Model file not found: {model_path}")
-    # Check if the class names file exists
-    if not os.path.exists(class_names_path):
-        raise FileNotFoundError(f"Class names file not found: {class_names_path}")
+    return predicted_class
 
-    # Load the class names from the JSON file
-    with open(class_names_path, 'r') as f:
-        class_names = json.load(f)
+class_indices = ["apple_pie", "baby_back_ribs", "baklava", "beef_carpaccio", "beef_tartare", "beet_salad", "beignets", "bibimbap", "bread_pudding", "breakfast_burrito", "bruschetta", "caesar_salad", "cannoli", "caprese_salad", "carrot_cake", "ceviche", "cheese_plate", "cheesecake", "chicken_curry", "chicken_quesadilla", "chicken_wings", "chocolate_cake", "chocolate_mousse", "churros", "clam_chowder", "club_sandwich", "crab_cakes", "creme_brulee", "croque_madame", "cup_cakes", "deviled_eggs", "donuts", "dumplings", "edamame", "eggs_benedict", "escargots", "falafel", "filet_mignon", "fish_and_chips", "foie_gras", "french_fries", "french_onion_soup", "french_toast", "fried_calamari", "fried_rice", "frozen_yogurt", "garlic_bread", "gnocchi", "greek_salad", "grilled_cheese_sandwich", "grilled_salmon", "guacamole", "gyoza", "hamburger", "hot_and_sour_soup", "hot_dog", "huevos_rancheros", "hummus", "ice_cream", "lasagna", "lobster_bisque", "lobster_roll_sandwich", "macaroni_and_cheese", "macarons", "miso_soup", "mussels", "nachos", "omelette", "onion_rings", "oysters", "pad_thai", "paella", "pancakes", "panna_cotta", "peking_duck", "pho", "pizza", "pork_chop", "poutine", "prime_rib", "pulled_pork_sandwich", "ramen", "ravioli", "red_velvet_cake", "risotto", "samosa", "sashimi", "scallops", "seaweed_salad", "shrimp_and_grits", "spaghetti_bolognese", "spaghetti_carbonara", "spring_rolls", "steak", "strawberry_shortcake", "sushi", "tacos", "takoyaki", "tiramisu", "tuna_tartare", "waffles"]
+# Example usage
+image_path = 'sample_pics/76.jpg'  # Replace with the path to your image
 
-    num_classes = len(class_names)
-    # Initialize the model
-    model = Food101CNN(num_classes=num_classes)
-    # Set the device to GPU if available, otherwise CPU
-    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-    # Load the model weights
-    model.load_state_dict(torch.load(model_path, map_location=device))
-    # Set the model to evaluation mode
-    model.eval()
-
-    return model, class_names
-
-
-# Predefined paths for the model and class names
-model_path = "weights/data/best_model.pth"
-class_names_path = "weights/data/classnames/class_names.json"
-
-# Load the model and class names once
-model, class_names = load_model(model_path, class_names_path)
-
-
-# Function to predict an image
-def predict_image(image):
-    # Define the image transformations
-    transform = transforms.Compose([
-        transforms.Resize((128, 128)),  # Resize the image
-        transforms.ToTensor(),  # Convert the image to a tensor
-        transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),  # Normalize the image
-    ])
-
-    # Open and preprocess the image
-    image = image.convert('RGB')
-    image = transform(image).unsqueeze(0)  # Add batch dimension
-
-    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-    image = image.to(device)  # Move image to the device
-
-    model.to(device)  # Move model to the device
-
-    # Predict the class of the image
-    with torch.no_grad():
-        outputs = model(image)
-        _, predicted = torch.max(outputs.data, 1)
-        predicted_class = class_names[predicted.item()]
-        formatted_class = predicted_class.replace('_', ' ').title()  # Format the class name
-    #print("This is an image of a", formatted_class)
-    return formatted_class
+predicted_class = predict_image(image_path, model_final, class_indices)
+print(f'The model predicts the image is a: {predicted_class}')
